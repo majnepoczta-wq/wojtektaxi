@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wojtek Taxi Kraków - Transfer Lotnisko • Auschwitz • 24/7</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0F0F0F;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        
+        .bg-gradient {
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 194, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-5%, -5%) rotate(120deg); }
+            66% { transform: translate(5%, 5%) rotate(240deg); }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        nav {
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B00 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .lang-btn {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #FFF;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover, .lang-btn.active {
+            background: linear-gradient(135deg, #FF6B00, #FFD700);
+            color: #000;
+            border-color: transparent;
+        }
+        
+        .nav-cta {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #FF6B00, #FFD700);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.5);
+        }
+        
+        .hero {
+            padding: 100px 0 150px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 60px;
+            opacity: 0.7;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 80px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            flex-wrap: wrap;
+        }
+        
+        .stat-number {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B00, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+        
+        .services {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            opacity: 0.6;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px 40px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-icon {
+            font-size: 64px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card p {
+            font-size: 16px;
+            opacity: 0.8;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pricing {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .price-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .price-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .price-card:hover {
+            border-color: #FFD700;
+            transform: scale(1.05);
+        }
+        
+        .price-route {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .price-amount {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B00, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .price-currency {
+            font-size: 14px;
+            opacity: 0.5;
+        }
+        
+        .pricing-note {
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding: 30px;
+            background: rgba(255, 107, 0, 0.1);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .pricing-note h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #FFD700;
+        }
+        
+        .pricing-note p {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .gallery {
+            padding: 100px 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 215, 0, 0.2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: #FFD700;
+        }
+        
+        .reviews {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .review-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #FFD700;
+            border-radius: 15px;
+            padding: 35px 30px;
+        }
+        
+        .stars {
+            color: #FFD700;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .review-text {
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+        
+        .reviewer-flag {
+            font-size: 24px;
+        }
+        
+        .cta-section {
+            padding: 150px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.1));
+        }
+        
+        .cta-section h2 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 25px 60px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B00, #FFD700);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #FFF;
+            border: 2px solid #FFD700;
+        }
+        
+        .btn-secondary:hover {
+            background: #FFD700;
+            color: #000;
+        }
+        
+        footer {
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .hero h1 { font-size: 48px; }
+            .section-title { font-size: 40px; }
+            .cta-section h2 { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo" id="nav-logo">WOJTEK TAXI KRAKÓW</div>
+                <div class="nav-right">
+                    <div class="lang-switcher">
+                        <button class="lang-btn active" onclick="switchLang('pl')">🇵🇱</button>
+                        <button class="lang-btn" onclick="switchLang('en')">🇬🇧</button>
+                        <button class="lang-btn" onclick="switchLang('de')">🇩🇪</button>
+                        <button class="lang-btn" onclick="switchLang('es')">🇪🇸</button>
+                        <button class="lang-btn" onclick="switchLang('it')">🇮🇹</button>
+                        <button class="lang-btn" onclick="switchLang('he')">🇮🇱</button>
+                        <button class="lang-btn" onclick="switchLang('ar')">AR</button>
+                        <button class="lang-btn" onclick="switchLang('uk')">🇺🇦</button>
+                    </div>
+                    <a href="tel:+48799781590" class="nav-cta" id="nav-cta">📞 Zadzwoń</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="container">
+            <h1 id="hero-title">TWOJA JAZDA<br>CZEKA</h1>
+            <p class="hero-subtitle" id="hero-subtitle">Premium taxi w Krakowie • Szybko, bezpiecznie, niezawodnie</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label" id="stat1">Dostępny</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5★</div>
+                    <div class="stat-label" id="stat2">Ocena</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label" id="stat3">Punktualny</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="services-title">Co Oferuję</h2>
+                <p class="section-subtitle" id="services-subtitle">Profesjonalny transport po Krakowie i okolicy</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✈️</div>
+                    <h3 id="s1-title">Transfer Lotniskowy</h3>
+                    <p id="s1-desc">Bezpośredni transport na lotniska Balice i Pyrzowice. Monitorowanie lotów w cenie.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏛️</div>
+                    <h3 id="s2-title">Wycieczki do Auschwitz</h3>
+                    <p id="s2-desc">Komfortowe przejazdy do Muzeum Auschwitz-Birkenau. Dostępne wyjazdy w obie strony.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💳</div>
+                    <h3 id="s3-title">Elastyczne Płatności</h3>
+                    <p id="s3-desc">Gotówka, BLIK, PayPal, Revolut. Akceptuję wiele walut.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📶</div>
+                    <h3 id="s4-title">Darmowe WiFi</h3>
+                    <p id="s4-desc">Szybki internet w aucie</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">❄️</div>
+                    <h3 id="s5-title">Klimatyzacja</h3>
+                    <p id="s5-desc">Komfort w każdej porze</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🗣️</div>
+                    <h3 id="s6-title">Języki</h3>
+                    <p id="s6-desc">Polski, Angielski</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧳</div>
+                    <h3 id="s7-title">Duży Bagażnik</h3>
+                    <p id="s7-desc">Miejsce na walizy</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <h3 id="s8-title">Usługa Zakupy</h3>
+                    <p id="s8-desc">Pomoc w zakupach - 80 PLN</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔋</div>
+                    <h3 id="s9-title">Odpalanie Kablami</h3>
+                    <p id="s9-desc">Pomoc drogowa - 80 PLN</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="pricing-title">Stałe Ceny</h2>
+                <p class="section-subtitle" id="pricing-subtitle">Bez niespodzianek, bez ukrytych opłat</p>
+            </div>
+            
+            <div class="price-cards">
+                <div class="price-card">
+                    <div class="price-route" id="r1">Centrum → Lotnisko Balice</div>
+                    <div class="price-amount">120</div>
+                    <div class="price-currency">PLN (€28 / £24 / $30)</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-route" id="r2">Kraków → Auschwitz (w jedną)</div>
+                    <div class="price-amount">400</div>
+                    <div class="price-currency">PLN (€93 / £80 / $100)</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-route" id="r3">Kraków → Auschwitz (w 2 strony)</div>
+                    <div class="price-amount">600</div>
+                    <div class="price-currency">PLN (€140 / £120 / $150)</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-route" id="r4">Kraków → Pyrzowice</div>
+                    <div class="price-amount">600</div>
+                    <div class="price-currency">PLN (€140 / £120 / $150)</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-route" id="r5">Zakupy</div>
+                    <div class="price-amount">80</div>
+                    <div class="price-currency">PLN (€19 / £16 / $20)</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-route" id="r6">Odpalanie Kablami</div>
+                    <div class="price-amount">80</div>
+                    <div class="price-currency">PLN (€19 / £16 / $20)</div>
+                </div>
+            </div>
+            
+            <div class="pricing-note">
+                <h4 id="note-title">Ważne informacje</h4>
+                <p id="note-text">Minimalna opłata za kurs: 30 PLN<br>Minimalna opłata za zlecenie terminowe: 50 PLN</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title" id="gallery-title">Popularne Kierunki</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">🏛️ Rynek Główny</div>
+                <div class="gallery-item">🕍 Kazimierz</div>
+                <div class="gallery-item">✈️ Balice</div>
+                <div class="gallery-item">✈️ Pyrzowice</div>
+                <div class="gallery-item">⛏️ Wieliczka</div>
+                <div class="gallery-item">🕯️ Auschwitz</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="reviews">
+        <div class="container">
+            <h2 class="section-title" id="reviews-title">Opinie Klientów</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text" id="rev1">"Wspaniały kierowca! Punktualny, miły, bezpieczna jazda. Transfer na lotnisko bez stresu. Polecam!"</p>
+                    <div class="reviewer"><span class="reviewer-flag">🇬🇧</span><span>Sarah Thompson</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text" id="rev2">"Profesjonell und pünktlich! Hervorragender Service zum Flughafen. Sehr empfehlenswert!"</p>
+                    <div class="reviewer"><span class="reviewer-flag">🇩🇪</span><span>Klaus Müller</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text" id="rev3">"Wycieczka do Auschwitz była doskonale zorganizowana. Bezpieczna jazda, świetny kontakt."</p>
+                    <div class="reviewer"><span class="reviewer-flag">🇮🇹</span><span>Marco Rossi</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text" id="rev4">"Excelente servicio! Muy puntual, coche limpio y cómodo. Perfecto para ir al aeropuerto."</p>
+                    <div class="reviewer"><span class="reviewer-flag">🇪🇸</span><span>Carmen García</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text" id="rev5">"Najlepsze taxi w Krakowie! Zawsze na czas, uczciwe ceny, klimatyzacja. Super WiFi!"</p>
+                    <div class="reviewer"><span class="reviewer-flag">🇵🇱</span><span>Anna Kowalska</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container">
+            <h2 id="cta-title">Gotowy na Jazdę?</h2>
+            <div class="cta-buttons">
+                <a href="tel:+48799781590" class="btn-large btn-primary">📞 799 781 590</a>
+                <a href="https://wa.me/48799781590" class="btn-large btn-secondary">💬 WhatsApp</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Wojtek Taxi Kraków • 799 781 590</p>
+        </div>
+    </footer>
+    
+    <script>
+const t={pl:{'nav-logo':'WOJTEK TAXI KRAKÓW','nav-cta':'📞 Zadzwoń','hero-title':'TWOJA JAZDA<br>CZEKA','hero-subtitle':'Premium taxi w Krakowie • Szybko, bezpiecznie, niezawodnie',stat1:'Dostępny',stat2:'Ocena',stat3:'Punktualny','services-title':'Co Oferuję','services-subtitle':'Profesjonalny transport po Krakowie i okolicy','s1-title':'Transfer Lotniskowy','s1-desc':'Bezpośredni transport na lotniska Balice i Pyrzowice. Monitorowanie lotów w cenie.','s2-title':'Wycieczki do Auschwitz','s2-desc':'Komfortowe przejazdy do Muzeum Auschwitz-Birkenau. Dostępne wyjazdy w obie strony.','s3-title':'Elastyczne Płatności','s3-desc':'Gotówka, BLIK, PayPal, Revolut. Akceptuję wiele walut.','s4-title':'Darmowe WiFi','s4-desc':'Szybki internet w aucie','s5-title':'Klimatyzacja','s5-desc':'Komfort w każdej porze','s6-title':'Języki','s6-desc':'Polski, Angielski','s7-title':'Duży Bagażnik','s7-desc':'Miejsce na walizy','s8-title':'Usługa Zakupy','s8-desc':'Pomoc w zakupach - 80 PLN','s9-title':'Odpalanie Kablami','s9-desc':'Pomoc drogowa - 80 PLN','pricing-title':'Stałe Ceny','pricing-subtitle':'Bez niespodzianek, bez ukrytych opłat',r1:'Centrum → Lotnisko Balice',r2:'Kraków → Auschwitz (w jedną)',r3:'Kraków → Auschwitz (w 2 strony)',r4:'Kraków → Pyrzowice',r5:'Zakupy',r6:'Odpalanie Kablami','note-title':'Ważne informacje','note-text':'Minimalna opłata za kurs: 30 PLN<br>Minimalna opłata za zlecenie terminowe: 50 PLN','gallery-title':'Popularne Kierunki','reviews-title':'Opinie Klientów',rev1:'"Wspaniały kierowca! Punktualny, miły, bezpieczna jazda. Transfer na lotnisko bez stresu. Polecam!"',rev2:'"Profesjonell und pünktlich! Hervorragender Service zum Flughafen. Sehr empfehlenswert!"',rev3:'"Wycieczka do Auschwitz była doskonale zorganizowana. Bezpieczna jazda, świetny kontakt."',rev4:'"Excelente servicio! Muy puntual, coche limpio y cómodo. Perfecto para ir al aeropuerto."',rev5:'"Najlepsze taxi w Krakowie! Zawsze na czas, uczciwe ceny, klimatyzacja. Super WiFi!"','cta-title':'Gotowy na Jazdę?'},en:{'nav-logo':'WOJTEK TAXI KRAKÓW','nav-cta':'📞 Call','hero-title':'YOUR RIDE<br>AWAITS','hero-subtitle':'Premium taxi in Kraków • Fast, safe, reliable',stat1:'Available',stat2:'Rating',stat3:'Punctual','services-title':'What We Offer','services-subtitle':'Professional transportation across Kraków','s1-title':'Airport Transfers','s1-desc':'Direct transport to Balice and Pyrzowice airports. Flight monitoring included.','s2-title':'Auschwitz Tours','s2-desc':'Comfortable trips to Auschwitz-Birkenau Museum. Round trip available.','s3-title':'Flexible Payment','s3-desc':'Cash, BLIK, PayPal, Revolut. Multiple currencies accepted.','s4-title':'Free WiFi','s4-desc':'Fast internet in the car','s5-title':'Air Conditioning','s5-desc':'Comfort in any weather','s6-title':'Languages','s6-desc':'Polish, English','s7-title':'Large Trunk','s7-desc':'Room for luggage','s8-title':'Shopping Service','s8-desc':'Shopping assistance - 80 PLN','s9-title':'Jump Start','s9-desc':'Roadside assistance - 80 PLN','pricing-title':'Fixed Prices','pricing-subtitle':'No surprises, no hidden fees',r1:'Center → Balice Airport',r2:'Kraków → Auschwitz (one way)',r3:'Kraków → Auschwitz (round trip)',r4:'Kraków → Pyrzowice',r5:'Shopping',r6:'Jump Start','note-title':'Important Information','note-text':'Minimum fare: 30 PLN<br>Minimum scheduled booking: 50 PLN','gallery-title':'Popular Destinations','reviews-title':'Customer Reviews',rev1:'"Amazing driver! Punctual, friendly, safe. Airport transfer stress-free. Highly recommend!"',rev2:'"Professional and punctual! Excellent airport service. Highly recommended!"',rev3:'"Trip to Auschwitz was perfectly organized. Safe driving, great communication."',rev4:'"Excellent service! Very punctual, clean comfortable car. Perfect for airport."',rev5:'"Best taxi in Kraków! Always on time, fair prices, AC. Great WiFi!"','cta-title':'Ready to Ride?'},de:{'nav-logo':'WOJTEK TAXI KRAKAU','nav-cta':'📞 Anrufen','hero-title':'IHRE FAHRT<br>WARTET','hero-subtitle':'Premium Taxi in Krakau • Schnell, sicher, zuverlässig',stat1:'Verfügbar',stat2:'Bewertung',stat3:'Pünktlich','services-title':'Was Wir Bieten','services-subtitle':'Professioneller Transport in Krakau','s1-title':'Flughafentransfer','s1-desc':'Direkter Transport zu Flughäfen Balice und Pyrzowice. Flugüberwachung inklusive.','s2-title':'Auschwitz-Touren','s2-desc':'Komfortable Fahrten zum Auschwitz-Birkenau Museum. Hin- und Rückfahrt verfügbar.','s3-title':'Flexible Zahlung','s3-desc':'Bargeld, BLIK, PayPal, Revolut. Mehrere Währungen.','s4-title':'Kostenloses WiFi','s4-desc':'Schnelles Internet im Auto','s5-title':'Klimaanlage','s5-desc':'Komfort bei jedem Wetter','s6-title':'Sprachen','s6-desc':'Polnisch, Englisch','s7-title':'Großer Kofferraum','s7-desc':'Platz für Gepäck','s8-title':'Einkaufsservice','s8-desc':'Einkaufshilfe - 80 PLN','s9-title':'Starthilfe','s9-desc':'Pannenhilfe - 80 PLN','pricing-title':'Festpreise','pricing-subtitle':'Keine Überraschungen, keine versteckten Gebühren',r1:'Zentrum → Flughafen Balice',r2:'Krakau → Auschwitz (einfach)',r3:'Krakau → Auschwitz (hin+zurück)',r4:'Krakau → Pyrzowice',r5:'Einkaufen',r6:'Starthilfe','note-title':'Wichtige Informationen','note-text':'Mindestfahrpreis: 30 PLN<br>Mindestgebühr geplante Buchung: 50 PLN','gallery-title':'Beliebte Ziele','reviews-title':'Kundenbewertungen','cta-title':'Bereit zu Fahren?'},es:{'nav-logo':'WOJTEK TAXI CRACOVIA','nav-cta':'📞 Llamar','hero-title':'TU VIAJE<br>ESPERA','hero-subtitle':'Taxi premium en Cracovia • Rápido, seguro, confiable',stat1:'Disponible',stat2:'Calificación',stat3:'Puntual','services-title':'Qué Ofrecemos','services-subtitle':'Transporte profesional en Cracovia','s1-title':'Traslados Aeropuerto','s1-desc':'Transporte directo a aeropuertos Balice y Pyrzowice. Seguimiento de vuelos incluido.','s2-title':'Tours Auschwitz','s2-desc':'Viajes cómodos al Museo Auschwitz-Birkenau. Ida y vuelta disponible.','s3-title':'Pago Flexible','s3-desc':'Efectivo, BLIK, PayPal, Revolut. Múltiples monedas.','s4-title':'WiFi Gratis','s4-desc':'Internet rápido en el coche','s5-title':'Aire Acondicionado','s5-desc':'Comodidad en cualquier clima','s6-title':'Idiomas','s6-desc':'Polaco, Inglés','s7-title':'Maletero Grande','s7-desc':'Espacio para equipaje','s8-title':'Servicio de Compras','s8-desc':'Asistencia compras - 80 PLN','s9-title':'Arranque con Cables','s9-desc':'Asistencia carretera - 80 PLN','pricing-title':'Precios Fijos','pricing-subtitle':'Sin sorpresas, sin tarifas ocultas',r1:'Centro → Aeropuerto Balice',r2:'Cracovia → Auschwitz (ida)',r3:'Cracovia → Auschwitz (ida y vuelta)',r4:'Cracovia → Pyrzowice',r5:'Compras',r6:'Arranque','note-title':'Información Importante','note-text':'Tarifa mínima: 30 PLN<br>Tarifa mínima reserva programada: 50 PLN','gallery-title':'Destinos Populares','reviews-title':'Opiniones','cta-title':'¿Listo?'},it:{'nav-logo':'WOJTEK TAXI CRACOVIA','nav-cta':'📞 Chiama','hero-title':'IL TUO VIAGGIO<br>TI ASPETTA','hero-subtitle':'Taxi premium a Cracovia • Veloce, sicuro, affidabile',stat1:'Disponibile',stat2:'Valutazione',stat3:'Puntuale','services-title':'Cosa Offriamo','services-subtitle':'Trasporto professionale a Cracovia','s1-title':'Trasferimenti Aeroportuali','s1-desc':'Trasporto diretto agli aeroporti Balice e Pyrzowice. Monitoraggio voli incluso.','s2-title':'Tour Auschwitz','s2-desc':'Viaggi comodi al Museo Auschwitz-Birkenau. Andata e ritorno disponibile.','s3-title':'Pagamento Flessibile','s3-desc':'Contanti, BLIK, PayPal, Revolut. Più valute.','s4-title':'WiFi Gratuito','s4-desc':'Internet veloce in auto','s5-title':'Aria Condizionata','s5-desc':'Comfort in ogni stagione','s6-title':'Lingue','s6-desc':'Polacco, Inglese','s7-title':'Bagagliaio Grande','s7-desc':'Spazio per bagagli','s8-title':'Servizio Spesa','s8-desc':'Assistenza shopping - 80 PLN','s9-title':'Avviamento Cavi','s9-desc':'Assistenza stradale - 80 PLN','pricing-title':'Prezzi Fissi','pricing-subtitle':'Nessuna sorpresa, nessuna tariffa nascosta',r1:'Centro → Aeroporto Balice',r2:'Cracovia → Auschwitz (andata)',r3:'Cracovia → Auschwitz (andata e ritorno)',r4:'Cracovia → Pyrzowice',r5:'Spesa',r6:'Avviamento','note-title':'Informazioni Importanti','note-text':'Tariffa minima: 30 PLN<br>Tariffa minima prenotazione: 50 PLN','gallery-title':'Destinazioni Popolari','reviews-title':'Recensioni','cta-title':'Pronto?'},he:{'nav-logo':'WOJTEK TAXI קרקוב','nav-cta':'📞 התקשר','hero-title':'הנסיעה שלך<br>מחכה','hero-subtitle':'מונית פרימיום בקרקוב • מהיר, בטוח, אמין',stat1:'זמין',stat2:'דירוג',stat3:'דייקן','services-title':'מה אנחנו מציעים','services-subtitle':'הסעות מקצועיות בקרקוב','s1-title':'העברות לשדה תעופה','s1-desc':'הסעה ישירה לשדות התעופה באליצה ופירזוביצה. מעקב טיסות כלול.','s2-title':'סיורים לאושוויץ','s2-desc':'נסיעות נוחות למוזיאון אושוויץ-בירקנאו. הלוך ושוב זמין.','s3-title':'תשלום גמיש','s3-desc':'מזומן, BLIK, PayPal, Revolut. מטבעות מרובים.','s4-title':'WiFi חינם','s4-desc':'אינטרנט מהיר ברכב','s5-title':'מיזוג אוויר','s5-desc':'נוחות בכל מזג אוויר','s6-title':'שפות','s6-desc':'פולנית, אנגלית','s7-title':'תא מטען גדול','s7-desc':'מקום למזוודות','s8-title':'שירות קניות','s8-desc':'סיוע בקניות - 80 PLN','s9-title':'התנעה בכבלים','s9-desc':'סיוע בדרכים - 80 PLN','pricing-title':'מחירים קבועים','pricing-subtitle':'ללא הפתעות',r1:'מרכז → באליצה',r2:'קרקוב → אושוויץ (כיוון אחד)',r3:'קרקוב → אושוויץ (הלוך ושוב)',r4:'קרקוב → פירזוביצה',r5:'קניות',r6:'התנעה','note-title':'מידע חשוב','note-text':'תעריף מינימום: 30 PLN<br>תעריף מינימום הזמנה: 50 PLN','gallery-title':'יעדים','reviews-title':'ביקורות','cta-title':'מוכן?'},ar:{'nav-logo':'WOJTEK TAXI كراكوف','nav-cta':'📞 اتصل','hero-title':'رحلتك<br>في انتظارك','hero-subtitle':'تاكسي فاخر في كراكوف • سريع، آمن، موثوق',stat1:'متاح',stat2:'التقييم',stat3:'دقيق','services-title':'ما نقدمه','services-subtitle':'نقل احترافي في كراكوف','s1-title':'نقل المطار','s1-desc':'نقل مباشر إلى مطاري باليتسه وبيرزوفيتسه. متابعة الرحلات.','s2-title':'جولات أوشفيتز','s2-desc':'رحلات مريحة إلى متحف أوشفيتز-بيركيناو. الذهاب والعودة.','s3-title':'دفع مرن','s3-desc':'نقدًا، BLIK، PayPal، Revolut. عملات متعددة.','s4-title':'WiFi مجاني','s4-desc':'إنترنت سريع','s5-title':'تكييف','s5-desc':'راحة','s6-title':'اللغات','s6-desc':'البولندية، الإنجليزية','s7-title':'صندوق كبير','s7-desc':'مساحة للأمتعة','s8-title':'خدمة التسوق','s8-desc':'مساعدة - 80 PLN','s9-title':'تشغيل','s9-desc':'مساعدة - 80 PLN','pricing-title':'أسعار ثابتة','pricing-subtitle':'لا مفاجآت',r1:'المركز → مطار باليتسه',r2:'كراكوف → أوشفيتز (اتجاه واحد)',r3:'كراكوف → أوشفيتز (ذهابًا وإيابًا)',r4:'كراكوف → بيرزوفيتسه',r5:'التسوق',r6:'التشغيل','note-title':'معلومات مهمة','note-text':'الحد الأدنى: 30 PLN<br>الحد الأدنى للحجز: 50 PLN','gallery-title':'وجهات','reviews-title':'آراء','cta-title':'مستعد?'},uk:{'nav-logo':'WOJTEK TAXI КРАКІВ','nav-cta':'📞 Подзвонити','hero-title':'ВАША ПОЇЗДКА<br>ЧЕКАЄ','hero-subtitle':'Преміум таксі в Кракові • Швидко, безпечно',stat1:'Доступний',stat2:'Рейтинг',stat3:'Пунктуальний','services-title':'Що Пропонуємо','services-subtitle':'Професійний транспорт','s1-title':'Трансфер в Аеропорт','s1-desc':'Прямий транспорт до аеропортів Баліце та Пшовіце.','s2-title':'Тури в Освенцім','s2-desc':'Комфортні поїздки до музею Освенцім-Біркенау.','s3-title':'Гнучка Оплата','s3-desc':'Готівка, BLIK, PayPal, Revolut.','s4-title':'Безкоштовний WiFi','s4-desc':'Швидкий інтернет','s5-title':'Кондиціонер','s5-desc':'Комфорт','s6-title':'Мови','s6-desc':'Польська, Англійська','s7-title':'Великий Багажник','s7-desc':'Місце для валіз','s8-title':'Послуга Покупок','s8-desc':'Допомога - 80 PLN','s9-title':'Запуск','s9-desc':'Допомога - 80 PLN','pricing-title':'Фіксовані Ціни','pricing-subtitle':'Без сюрпризів',r1:'Центр → Баліце',r2:'Краків → Освенцім (в один бік)',r3:'Краків → Освенцім (туди і назад)',r4:'Краків → Пшовіце',r5:'Покупки',r6:'Запуск','note-title':'Важлива Інформація','note-text':'Мінімум: 30 PLN<br>Мінімум бронювання: 50 PLN','gallery-title':'Напрямки','reviews-title':'Відгуки','cta-title':'Готові?'}};function switchLang(l){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');const tr=t[l];if(tr){Object.keys(tr).forEach(k=>{const e=document.getElementById(k);if(e)e.innerHTML=tr[k]});}document.documentElement.setAttribute('dir',l==='he'||l==='ar'?'rtl':'ltr');document.documentElement.lang=l;}
+    </script>
+</body>
+</html>
